@@ -5,7 +5,7 @@
   --text: #e2e8f0;
   --muted: #94a3b8;
   --accent: #22d3ee;
-  --accent-dark: #0891b2;
+  --danger: #f87171;
   --max-width: 960px;
 }
 
@@ -15,6 +15,9 @@
 
 body {
   margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   line-height: 1.6;
   background: linear-gradient(160deg, #0f172a, #020617);
@@ -28,6 +31,10 @@ a {
 .container {
   width: min(var(--max-width), 92%);
   margin: 0 auto;
+}
+
+main {
+  flex: 1 0 auto;
 }
 
 .site-header {
@@ -127,10 +134,17 @@ h3 {
   border-radius: 0.5rem;
   display: inline-block;
   cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
 .btn:hover {
   background: #67e8f9;
+  transform: translateY(-1px);
+}
+
+.btn:disabled {
+  opacity: 0.7;
+  cursor: wait;
 }
 
 .btn-secondary {
@@ -145,7 +159,7 @@ h3 {
 .cards-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1rem;
+  gap: 2rem;
   margin: 1rem auto 2.2rem;
 }
 
@@ -164,10 +178,33 @@ h3 {
   margin: 1rem auto 3rem;
 }
 
+.contact-panel {
+  max-width: 640px;
+}
+
 .contact-form {
   display: grid;
   gap: 0.55rem;
-  max-width: 640px;
+  transform-origin: top center;
+  transition: opacity 0.35s ease, transform 0.35s ease, max-height 0.35s ease, margin 0.35s ease;
+  max-height: 900px;
+  overflow: hidden;
+}
+
+
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 0.25rem;
+}
+
+.contact-panel.is-submitted .contact-form {
+  opacity: 0;
+  transform: scale(0.76);
+  max-height: 0;
+  margin: 0;
+  pointer-events: none;
 }
 
 input,
@@ -180,10 +217,64 @@ textarea {
   font: inherit;
 }
 
+.form-status {
+  margin: 0.5rem 0 0;
+  color: #bae6fd;
+  min-height: 1.4em;
+  font-size: 0.95rem;
+}
+
+.form-status.error {
+  color: var(--danger);
+}
+
+.form-success {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  gap: 0.35rem;
+  margin-top: 0.6rem;
+  opacity: 0;
+  transform: translateY(10px) scale(0.94);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  pointer-events: none;
+  max-height: 0;
+  overflow: hidden;
+}
+
+.form-success.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  max-height: 220px;
+  pointer-events: auto;
+}
+
+#revertSubmit {
+  margin-top: 0.2rem;
+}
+
+.checkmark {
+  width: 56px;
+  height: 56px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font-size: 2rem;
+  line-height: 1;
+  color: #022c22;
+  background: #4ade80;
+  box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.35);
+}
+
+.form-success.visible .checkmark {
+  animation: pop-check 0.52s ease forwards;
+}
+
 .site-footer {
   border-top: 1px solid #1f2937;
   padding: 1rem 0;
   color: var(--muted);
+  margin-top: auto;
 }
 
 .policy h2 {
