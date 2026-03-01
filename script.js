@@ -3,7 +3,7 @@ if (yearEl) {
   yearEl.textContent = new Date().getFullYear();
 }
 
-// Simple page enter/exit transition for internal HTML navigation.
+// Page enter/exit transitions for internal links.
 document.body.classList.add('page-enter');
 requestAnimationFrame(() => {
   document.body.classList.add('page-enter-active');
@@ -34,6 +34,26 @@ internalLinks.forEach((link) => {
   });
 });
 
+// Smooth reveal on scroll.
+const revealEls = document.querySelectorAll('.reveal');
+if ('IntersectionObserver' in window) {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.14, rootMargin: '0px 0px -10% 0px' },
+  );
+
+  revealEls.forEach((el) => observer.observe(el));
+} else {
+  revealEls.forEach((el) => el.classList.add('in-view'));
+}
+
 const contactForm = document.getElementById('contactForm');
 if (contactForm) {
   const contactPanel = document.getElementById('contactPanel');
@@ -45,31 +65,17 @@ if (contactForm) {
   const successText = document.getElementById('successText');
 
   const showSuccess = (message) => {
-    if (contactPanel) {
-      contactPanel.classList.add('is-submitted');
-    }
-
-    if (formSuccess) {
-      formSuccess.classList.add('visible');
-      formSuccess.setAttribute('aria-hidden', 'false');
-    }
-
-    if (successText) {
-      successText.textContent = message;
-    }
+    contactPanel?.classList.add('is-submitted');
+    formSuccess?.classList.add('visible');
+    formSuccess?.setAttribute('aria-hidden', 'false');
+    if (successText) successText.textContent = message;
   };
 
   const resetToNormalMode = () => {
     contactForm.reset();
-
-    if (contactPanel) {
-      contactPanel.classList.remove('is-submitted');
-    }
-
-    if (formSuccess) {
-      formSuccess.classList.remove('visible');
-      formSuccess.setAttribute('aria-hidden', 'true');
-    }
+    contactPanel?.classList.remove('is-submitted');
+    formSuccess?.classList.remove('visible');
+    formSuccess?.setAttribute('aria-hidden', 'true');
 
     if (formStatus) {
       formStatus.textContent = '';
@@ -87,20 +93,16 @@ if (contactForm) {
     const email = document.getElementById('email')?.value ?? '';
     const message = document.getElementById('message')?.value ?? '';
 
-    const subject = encodeURIComponent('Boomerjams Portfolio Contact');
+    const subject = encodeURIComponent('kobbo Portfolio Contact');
     const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
     window.location.href = `mailto:kobbowork@gmail.com?subject=${subject}&body=${body}`;
   };
 
-  if (testSubmitButton) {
-    testSubmitButton.addEventListener('click', () => {
-      showSuccess('Test mode: successful submission animation triggered. Use Revert to return to normal email submission.');
-    });
-  }
+  testSubmitButton?.addEventListener('click', () => {
+    showSuccess('Test mode: successful submission animation triggered. Use Revert to return to normal email submission.');
+  });
 
-  if (revertSubmitButton) {
-    revertSubmitButton.addEventListener('click', resetToNormalMode);
-  }
+  revertSubmitButton?.addEventListener('click', resetToNormalMode);
 
   contactForm.addEventListener('submit', async (event) => {
     event.preventDefault();
@@ -131,11 +133,11 @@ if (contactForm) {
         throw new Error(`Submit failed with status ${response.status}`);
       }
 
-      showSuccess("Your message has been sent successfully. I'll get back to you soon.");
       contactForm.reset();
+      showSuccess("Your message has been sent successfully. I'll get back to you soon.");
     } catch (error) {
       if (formStatus) {
-        formStatus.textContent = 'Could not confirm web submission. Opening your email app as a backup...';
+        formStatus.textContent = 'Could not confirm web submission. Opening your email app as backup...';
         formStatus.classList.add('error');
       }
 

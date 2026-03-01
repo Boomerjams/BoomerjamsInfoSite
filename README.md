@@ -1,6 +1,6 @@
-# Boomerjams Info Site
+# kobbo Portfolio Site
 
-A static portfolio website for **Boomerjams** that showcases upcoming apps and provides clear legal/info pages and contact options.
+A static portfolio website for **kobbo** that showcases upcoming apps and provides clear legal/info pages and contact options.
 
 ## What this site includes
 
@@ -38,7 +38,7 @@ Use the provided launcher (recommended). It **always serves from this repo root*
 From anywhere:
 
 ```bash
-python3 /path/to/BoomerjamsInfoSite/serve_local.py
+python3 /path/to/kobbo-site/serve_local.py
 ```
 
 If you are already inside the repo:
@@ -64,7 +64,7 @@ Stop server with `Ctrl + C`.
 If you prefer `python -m http.server`, you **must** run it in the repo root:
 
 ```bash
-cd /path/to/BoomerjamsInfoSite
+cd /path/to/kobbo-site
 python3 -m http.server 4173
 ```
 
@@ -140,13 +140,13 @@ use this checklist:
 1. Use the safer launcher script (recommended):
 
 ```bash
-python3 /path/to/BoomerjamsInfoSite/serve_local.py
+python3 /path/to/kobbo-site/serve_local.py
 ```
 
 2. If using `python -m http.server`, make sure you are in the project folder **before** starting the server:
 
 ```bash
-cd /path/to/BoomerjamsInfoSite
+cd /path/to/kobbo-site
 python3 -m http.server 4173
 ```
 
@@ -236,3 +236,15 @@ If you want more robust contact handling than the current FormSubmit integration
 - Add success/error message UX on submit.
 
 This avoids reliance on a local email client and works better on many mobile/desktop setups.
+
+
+## Connect your custom domain
+
+Once deployed (GitHub Pages, Netlify, or Vercel), connect your domain by:
+
+1. Adding your domain in the hosting dashboard (for example `kobbo.app` or `www.kobbo.app`).
+2. Creating DNS records at your registrar as instructed by the host (usually `A`/`ALIAS` for root and `CNAME` for `www`).
+3. Enabling HTTPS/SSL in hosting settings.
+4. Waiting for DNS propagation, then verifying both root and `www` URLs load your site.
+
+For GitHub Pages specifically, add a `CNAME` file at repo root containing your domain and configure matching DNS records.

@@ -22,7 +22,7 @@ class Handler(SimpleHTTPRequestHandler):
     pass
 
 server = ThreadingHTTPServer(("", PORT), Handler)
-print(f"Serving BoomerjamsInfoSite from: {repo_root}")
+print(f"Serving kobbo site from: {repo_root}")
 print(f"Open: http://localhost:{PORT}/index.html")
 print("Press Ctrl+C to stop.")
 
