@@ -9,11 +9,11 @@ requestAnimationFrame(() => {
   document.body.classList.add('page-enter-active');
 });
 
-const internalLinks = document.querySelectorAll('a[href$=".html"], a[href*=".html#"]');
+const internalLinks = document.querySelectorAll('a[href]');
 internalLinks.forEach((link) => {
   link.addEventListener('click', (event) => {
     const href = link.getAttribute('href');
-    if (!href || href.startsWith('http') || href.startsWith('mailto:')) {
+    if (!href || href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('#')) {
       return;
     }
 

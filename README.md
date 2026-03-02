@@ -80,6 +80,20 @@ The command prints the local URL (usually something like `http://localhost:3000`
 
 ---
 
+
+## Clean URLs (no `.html`)
+
+This project now supports folder-based routes so pages can be visited as:
+
+- `/`
+- `/apps`
+- `/descriptions`
+- `/privacy-policy`
+
+Implementation detail: each route has its own folder with `index.html` (for example `apps/index.html`).
+
+---
+
 ## Manual testing checklist
 
 Use this checklist before publishing.
