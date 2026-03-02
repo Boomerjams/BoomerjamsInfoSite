@@ -66,7 +66,6 @@ const contactForm = document.getElementById('contactForm');
 if (contactForm) {
   const contactPanel = document.getElementById('contactPanel');
   const submitButton = document.getElementById('contactSubmit');
-  const testSubmitButton = document.getElementById('testSubmit');
   const revertSubmitButton = document.getElementById('revertSubmit');
   const formStatus = document.getElementById('formStatus');
   const formSuccess = document.getElementById('formSuccess');
@@ -106,9 +105,6 @@ if (contactForm) {
     window.location.href = `mailto:kobbowork@gmail.com?subject=${subject}&body=${body}`;
   };
 
-  testSubmitButton?.addEventListener('click', () => {
-    showSuccess('Test mode: successful submission animation triggered. Use Revert to return to normal email submission.');
-  });
 
   revertSubmitButton?.addEventListener('click', resetToNormalMode);
 
