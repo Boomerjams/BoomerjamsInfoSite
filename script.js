@@ -150,3 +150,56 @@ if (contactForm) {
     }
   });
 }
+
+
+const deletionForm = document.getElementById('deletionRequestForm');
+if (deletionForm) {
+  const deletionSubmit = document.getElementById('deletionSubmit');
+  const deletionStatus = document.getElementById('deletionStatus');
+
+  deletionForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    if (!deletionForm.checkValidity()) {
+      deletionForm.reportValidity();
+      return;
+    }
+
+    if (deletionSubmit) {
+      deletionSubmit.disabled = true;
+      deletionSubmit.textContent = 'Submitting...';
+    }
+
+    if (deletionStatus) {
+      deletionStatus.textContent = 'Submitting deletion request...';
+      deletionStatus.classList.remove('error');
+    }
+
+    try {
+      const response = await fetch(deletionForm.action, {
+        method: 'POST',
+        body: new FormData(deletionForm),
+        headers: { Accept: 'application/json' },
+      });
+
+      if (!response.ok) {
+        throw new Error(`Submit failed with status ${response.status}`);
+      }
+
+      deletionForm.reset();
+      if (deletionStatus) {
+        deletionStatus.textContent = 'Deletion request submitted successfully. We will follow up at your account email.';
+      }
+    } catch (error) {
+      if (deletionStatus) {
+        deletionStatus.textContent = 'Could not confirm web submission. Please email kobbowork@gmail.com with your Firebase UID and account email.';
+        deletionStatus.classList.add('error');
+      }
+    } finally {
+      if (deletionSubmit) {
+        deletionSubmit.disabled = false;
+        deletionSubmit.textContent = 'Submit Deletion Request';
+      }
+    }
+  });
+}

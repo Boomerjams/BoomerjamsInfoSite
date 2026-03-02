@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <title>Data Deletion Request | kobbo</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a class="brand" href="/">kobbo</a>
+        <nav aria-label="Main navigation">
+          <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/descriptions">Descriptions</a></li>
+            <li><a href="/privacy-policy">Privacy Policy</a></li>
+            <li><a href="/apps">Apps</a></li>
+            <li><a href="/#contact">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container page-main reveal">
+      <h1>Data Deletion Request</h1>
+      <p class="lead">
+        Use this form to request deletion of your user data from our Firebase-backed application systems.
+        Provide as much identifying information as possible so we can securely locate your account.
+      </p>
+
+      <section class="card">
+        <h2>Required account details</h2>
+        <form id="deletionRequestForm" class="contact-form" action="https://formsubmit.co/ajax/kobbowork@gmail.com" method="post">
+          <input type="hidden" name="_subject" value="Firebase Data Deletion Request" />
+          <input type="hidden" name="_captcha" value="false" />
+
+          <label for="delete-fullname">Full legal name</label>
+          <input id="delete-fullname" name="full_name" type="text" required />
+
+          <label for="delete-email">Account email (used in app)</label>
+          <input id="delete-email" name="account_email" type="email" required />
+
+          <label for="delete-uid">Firebase UID</label>
+          <input id="delete-uid" name="firebase_uid" type="text" required />
+
+          <label for="delete-provider">Auth provider</label>
+          <select id="delete-provider" name="auth_provider" required>
+            <option value="" selected disabled>Select provider</option>
+            <option value="email_password">Email/Password</option>
+            <option value="google">Google</option>
+            <option value="apple">Apple</option>
+            <option value="phone">Phone</option>
+            <option value="other">Other</option>
+          </select>
+
+          <label for="delete-platform">Platform used</label>
+          <select id="delete-platform" name="platform" required>
+            <option value="" selected disabled>Select platform</option>
+            <option value="ios">iOS</option>
+            <option value="android">Android</option>
+            <option value="web">Web</option>
+          </select>
+
+          <label for="delete-display-name">Display name / username (if any)</label>
+          <input id="delete-display-name" name="display_name" type="text" />
+
+          <label for="delete-phone">Phone number on account (if any)</label>
+          <input id="delete-phone" name="phone_number" type="tel" />
+
+          <label for="delete-created">Approximate account creation date</label>
+          <input id="delete-created" name="account_created" type="date" />
+
+          <label for="delete-reason">Deletion request details</label>
+          <textarea id="delete-reason" name="request_details" rows="6" required placeholder="Please include any extra identifiers (last login, linked providers, profile info) to help us verify your identity and find the right account."></textarea>
+
+          <label for="delete-country">Country / State</label>
+          <input id="delete-country" name="location" type="text" required />
+
+          <label>
+            <input type="checkbox" name="identity_confirmation" required />
+            I confirm I am the account owner (or legally authorized representative) for this deletion request.
+          </label>
+
+          <label>
+            <input type="checkbox" name="deletion_acknowledgement" required />
+            I understand this request may permanently remove account data that cannot be recovered.
+          </label>
+
+          <button type="submit" class="btn" id="deletionSubmit">Submit Deletion Request</button>
+          <p id="deletionStatus" class="form-status" aria-live="polite"></p>
+        </form>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>© <span id="year"></span> kobbo. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script src="/script.js"></script>
+  </body>
+</html>
