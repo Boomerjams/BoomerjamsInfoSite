@@ -5,7 +5,7 @@ A static portfolio website for **kobbo** that showcases upcoming apps and provid
 ## What this site includes
 
 - `index.html` — home page with overview + contact form.
-- `apps.html` — app showcase for **Festiv** and **Pairus**.
+- `apps.html` — app showcase for **Festiv** and **Red Thread**.
 - `descriptions.html` — plain-language app descriptions.
 - `privacy-policy.html` — portfolio/app privacy policy.
 - `styles.css` — all styling.
@@ -116,7 +116,7 @@ On `apps.html`:
 - Verify **Festiv** section exists.
 - Verify repo link points to:
   - `https://github.com/LocalPartyAppTeam/LocalPartyApp`
-- Verify **Pairus** section exists and is marked unpublished/in progress.
+- Verify **Red Thread** section exists and is marked unpublished/in progress.
 
 ### 3) Contact form behavior
 
