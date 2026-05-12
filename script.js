@@ -9,6 +9,30 @@ requestAnimationFrame(() => {
   document.body.classList.add('page-enter-active');
 });
 
+const RT_PATH_PREFIX = '/red-thread';
+const isRtPath = (pathname) => {
+  if (!pathname) return false;
+  return pathname === RT_PATH_PREFIX || pathname.startsWith(`${RT_PATH_PREFIX}/`);
+};
+
+const rtOverlay = document.createElement('div');
+rtOverlay.className = 'rt-overlay';
+document.body.appendChild(rtOverlay);
+
+if (sessionStorage.getItem('rtTransition') === '1') {
+  sessionStorage.removeItem('rtTransition');
+  rtOverlay.style.transform = 'translateX(0)';
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      rtOverlay.style.transform = '';
+      rtOverlay.classList.add('sweep-out');
+    });
+  });
+  rtOverlay.addEventListener('animationend', () => {
+    rtOverlay.classList.remove('sweep-out');
+  }, { once: true });
+}
+
 const internalLinks = document.querySelectorAll('a[href]');
 internalLinks.forEach((link) => {
   link.addEventListener('click', (event) => {
@@ -26,7 +50,20 @@ internalLinks.forEach((link) => {
       return;
     }
 
+    const fromRt = isRtPath(window.location.pathname);
+    const toRt = isRtPath(targetUrl.pathname);
+
     event.preventDefault();
+
+    if (fromRt || toRt) {
+      sessionStorage.setItem('rtTransition', '1');
+      rtOverlay.classList.add('sweep-in');
+      window.setTimeout(() => {
+        window.location.href = href;
+      }, 650);
+      return;
+    }
+
     document.body.classList.add('page-exit-active');
     window.setTimeout(() => {
       window.location.href = href;

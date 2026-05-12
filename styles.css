@@ -369,6 +369,114 @@ select {
   100% { transform: scale(1); }
 }
 
+/* Red Thread theme */
+body.theme-red-thread {
+  --bg: #fff5f5;
+  --surface: #ffffff;
+  --ink: #3a1820;
+  --muted: #7a4a55;
+  --line: #f3c6cc;
+  --accent: #c2123b;
+  --accent-ink: #fff7f8;
+  --salmon: #e0264c;
+  --seafoam: #ffd9df;
+  --sand: #fff0f1;
+  --baby-blue: #ffe3e7;
+  --shadow: 0 18px 40px rgba(138, 10, 38, 0.18);
+  background:
+    radial-gradient(circle at 0% 0%, #ffe3e7 0%, #fff8f9 30%, transparent 55%),
+    radial-gradient(circle at 100% 20%, #ffc6cf 0%, #fff0f1 35%, transparent 60%),
+    linear-gradient(180deg, #ffffff 0%, #ffeef0 100%);
+}
+
+body.theme-red-thread h1,
+body.theme-red-thread h2,
+body.theme-red-thread h3,
+body.theme-red-thread h4 {
+  color: #5a0b22;
+}
+
+body.theme-red-thread .brand {
+  color: #5a0b22;
+}
+
+body.theme-red-thread .nav-links a {
+  color: #6b1a2f;
+}
+
+body.theme-red-thread .nav-links a:hover {
+  background: #ffd9df;
+  color: #5a0b22;
+}
+
+body.theme-red-thread .nav-links a[aria-current='page'] {
+  background: var(--accent);
+  color: #fff7f8;
+}
+
+body.theme-red-thread .site-header {
+  background: rgba(255, 245, 245, 0.85);
+  border-bottom-color: #f3c6cc;
+}
+
+body.theme-red-thread .eyebrow {
+  color: #a8264a;
+}
+
+body.theme-red-thread .lead,
+body.theme-red-thread .hero p {
+  color: #7a4a55;
+}
+
+body.theme-red-thread .btn {
+  color: #fff7f8;
+}
+
+body.theme-red-thread .btn-secondary {
+  background: #ffd9df;
+  color: #5a0b22;
+}
+
+body.theme-red-thread .site-footer {
+  background: rgba(255, 245, 245, 0.6);
+  color: #8a4a55;
+  border-top-color: #f3c6cc;
+}
+
+body.theme-red-thread a {
+  color: #c2123b;
+}
+
+/* Red Thread sweep overlay */
+.rt-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  transform: translateX(-100%);
+  background:
+    linear-gradient(110deg, #ffffff 0%, #ffd2da 18%, #e0264c 45%, #8a0a26 100%);
+  pointer-events: none;
+  will-change: transform;
+}
+
+.rt-overlay.sweep-in {
+  animation: rt-sweep-in 650ms cubic-bezier(0.7, 0, 0.2, 1) forwards;
+}
+
+.rt-overlay.sweep-out {
+  animation: rt-sweep-out 650ms cubic-bezier(0.7, 0, 0.2, 1) forwards;
+}
+
+@keyframes rt-sweep-in {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(0); }
+}
+
+@keyframes rt-sweep-out {
+  from { transform: translateX(0); }
+  to   { transform: translateX(100%); }
+}
+
 @media (max-width: 760px) {
   .nav-wrap {
     flex-direction: column;
